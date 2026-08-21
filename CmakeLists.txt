@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 4.0)
+project(waves)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+file(GLOB SOURCES src/*.cpp)
+
+add_executable(waves ${SOURCES})
+# Setting parameters for raylib
+set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
+set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # or games
+
+target_include_directories(waves PRIVATE ./include)
+add_subdirectory(lib/raylib-6.0)
+
+target_link_libraries(waves PRIVATE raylib)
