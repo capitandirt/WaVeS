@@ -1,36 +1,26 @@
 #include <Wave.h>
 
-void WaveDriver::draw()
+void WaveDriver::draw() // отрисовка в окне поля волн
 {
-    screen.clear();
-    // for(int i = 0; i < dots.size(); i++)
-    // {
-    //     screen.setPixel(i, (int)-dots[i].z + screen.height/2, WHITE);
-    // }
     for(int x = 0; x < length; x++)
     {
         for(int y = 0; y < height; y++)
         {
-            uint8_t intensivity = 128 + (int)dots[y*length + x].z / (1<<4);
-            if(intensivity > 255) intensivity = 255;
-            if(intensivity < 0) intensivity = 0;
+            uint8_t intensivity = 128 + (int)dots[y*length + x].z / (1<<4); // определение цвета данного пикселя от значения колебания в данной точке
+            if(intensivity > 255) intensivity = 255; // органичение сверху
+            if(intensivity < 0) intensivity = 0; // ограничение снизу
             Color color = {intensivity, intensivity, intensivity, intensivity};
             screen.setPixel(x, y, color);
         }
     }
-    screen.draw();
+    screen.draw(); // отрисовка экрана в окне
 }
 
-void WaveDriver::createLine()
+void WaveDriver::createPlate(int _length, int _height) // создание рабочей области - поля волн с заданной шириной и высотой
 {
-    for(int x = 0; x < 500; x++)
-    {
-        dots.push_back(WaveDot{0, 1, 0});
-    }
-}
-
-void WaveDriver::createPlate(int _length, int _height)
-{
+    /*
+        функция заполняет вектор точек колебания в зависимости от полей ширины и длины
+    */
     length = _length;
     height = _height;
     for(int x = 0; x < length; x++)

@@ -12,6 +12,6 @@ set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
 set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # or games
 
 target_include_directories(waves PRIVATE ./include)
-add_subdirectory(lib/raylib-6.0)
+# add_subdirectory(lib/raylib-6.0)
 
 target_link_libraries(waves PRIVATE raylib)
